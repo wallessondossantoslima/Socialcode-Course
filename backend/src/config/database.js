@@ -1,14 +1,17 @@
 const mysql = require("mysql");
 
 const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "root",
-  database: "socialcode",
+  host: process.env.DATABASE_HOST,
+  user: process.env.DATABASE_USER,
+  password: process.env.DATABASE_PASSWORD,
+  database: process.env.DATABASE_NAME,
 });
 
 connection.connect((error) => {
   if (error) {
+    if(process.env.NODE_ENV==="development"){
+      console.log(error);
+    }
     console.log("Erro ao conectar ao banco de dados:");
     return;
   }
