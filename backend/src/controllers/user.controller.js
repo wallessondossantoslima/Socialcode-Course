@@ -2,30 +2,35 @@ const database = require("../config/database");
 
 let users = [];
 
+const UserModel = require("../model/user.model");
+
 class UserController {
-  store(req, res) {
-    const user = {
-      ...req.body,
-      id: users.length + 1,
-      reg_date: new Date().toISOString(),
-    };
 
-    users = [...users, user];
-
-    res.send(user);
+  constructor() {
+    this.UserModel = new UserModel();
   }
 
-  getAll(req, res) {
-    database.query(
-      `SELECT U.*, NA.name as nivel_acesso FROM USER U
-       JOIN NIVEL_ACESSO NA on U.nivel_acesso_id = NA.id`,
-      function (error, results, fields) {
-        if (error) throw error;
-        console.log("All users:", results);
-      }
-    );
+  async store(req, res) {
 
-    res.send(users);
+    try {
+      const result = await this.UserModel.createUser(req.body);
+
+      res.send(result);
+    } catch (error) {
+      
+      res.status(404).send(error);
+    }
+  }
+
+  async getAll(req, res) {
+
+    try {
+      const users = await this.UserModel.getAllUsers();
+
+      res.send(users);
+    } catch (error) {
+      res.status(404).send(error);
+    }
   }
 
   getOne(req, res) {
