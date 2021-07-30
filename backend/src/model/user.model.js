@@ -9,7 +9,7 @@ class UserModel {
         return result[0];
     }
 
-    async createUser(date) {
+    async createUser(data) {
 
         const result = await connection.promise().query(`INSERT INTO USER (firstname, lastname, email, nivel_acesso_id) values ('${data.firstname}', '${data.lastname}', '${data.email}','${data.nivel_acesso_id})`);
             
