@@ -36,28 +36,14 @@ class UserController {
   getOne(req, res) {
     const id = Number(req.params.id);
 
-    const user = users.find((user) => {
-      if (user.id === id) {
-        return user;
-      }
-    });
 
-    res.send({ user });
+    res.send({ user: {} });
   }
 
   update(req, res) {
     const id = Number(req.params.id);
     const body = req.body;
 
-    users = users.map((user) => {
-      if (user.id === id) {
-        const { firstname, lastname, email } = body;
-
-        return { ...user, firstname, lastname, email };
-      }
-
-      return user;
-    });
 
     res.send({ id, users });
   }
@@ -65,9 +51,6 @@ class UserController {
   remove(req, res) {
     const id = Number(req.params.id);
 
-    users = users.filter((user) => {
-      return user.id !== id;
-    });
 
     res.send({ message: "Usuário removido" });
   }
