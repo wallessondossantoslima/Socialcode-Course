@@ -1,5 +1,3 @@
-const database = require("../config/database");
-
 let users = [];
 
 const UserModel = require("../model/user.model");
