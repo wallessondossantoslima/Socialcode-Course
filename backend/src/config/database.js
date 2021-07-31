@@ -12,7 +12,7 @@ connection.connect((error) => {
     if(process.env.NODE_ENV==="development"){
       console.log(error);
     }
-    console.log("Erro ao conectar ao banco de dados:");
+    console.log(error);
     return;
   }
 
