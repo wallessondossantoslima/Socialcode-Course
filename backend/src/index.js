@@ -2,11 +2,11 @@ require("dotenv").config();
 
 const morgan = require("morgan");
 
-const express = require("express");no
+const express = require("express");
 
 const UserRouter = require("./routes/user.router");
 
-const HTTP_PORT = process.env.HTTP_PORT || 3306;
+const HTTP_PORT = process.env.HTTP_PORT || 3305;
 
 const app = express();
 
