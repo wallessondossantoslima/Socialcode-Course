@@ -31,26 +31,37 @@ class UserController {
     }
   }
 
-  getOne(req, res) {
+  async getOne(req, res) {
     const id = Number(req.params.id);
 
+    const user = await this.UserModel.getOne(id);
 
-    res.send({ user: {} });
+    if(!user){
+      return res.status(404).send({message: "nao encontrado"});
+    }
+
+    res.send({ user });
   }
 
-  update(req, res) {
+  async update(req, res) {
     const id = Number(req.params.id);
     const body = req.body;
 
+    const response = await this.UserModel.updateUser(id, body);
 
-    res.send({ id, users });
+    res.send({ response });
   }
 
-  remove(req, res) {
+  async remove(req, res) {
     const id = Number(req.params.id);
 
+    const response = await this.UserModel.removeUser(id);
 
-    res.send({ message: "Usuário removido" });
+    if(response[0].affectedRuns === 0){
+      return res.status(404).send({message: "nao encontrado"});
+    }
+
+    res.send({ response });
   }
 }
 

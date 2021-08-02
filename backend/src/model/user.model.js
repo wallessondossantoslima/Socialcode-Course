@@ -1,3 +1,4 @@
+const Connection = require("mysql2/typings/mysql/lib/Connection");
 const connection = require("../config/database");
 
 class UserModel {
@@ -17,16 +18,24 @@ class UserModel {
 
     }
 
-    updateUser() {
+    async updateUser(id, body) {
+        const result = await Connection.promise().query(`UPDATE USER SET firstname = "${data.firstname}
+        ", lastname = "${data.lastname}", email = "${data.email}", "nivel_acesso_id = 2" WHERE id = "${id}"`);
 
+        return result;
     }
 
-    removeUser() {
+     async removeUser(id) {
+        const result = await Connection.promise().query(`DELETE FROM USER WHERE id = ${id}`);
 
+        return result;
     }
 
-    getOneUser() {
+    async getOneUser(id) {
 
+        const result = await Connection.promise().query(`SELEC * FROM USER WHERE id = ${id}`);
+
+        return result[0];
     }
 
 }
