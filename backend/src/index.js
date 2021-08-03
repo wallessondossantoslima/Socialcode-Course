@@ -6,7 +6,7 @@ const express = require("express");
 
 const UserRouter = require("./routes/user.router");
 
-const HTTP_PORT = process.env.HTTP_PORT || 3305;
+const HTTP_PORT = process.env.HTTP_PORT || 3333;
 
 const app = express();
 
