@@ -5,15 +5,17 @@ const morgan = require("morgan");
 const express = require("express");
 
 const UserRouter = require("./routes/user.router");
+const LanguageRouter = require("./routes/language.router");
 
 const HTTP_PORT = process.env.HTTP_PORT || 3333;
 
 const app = express();
 
 app.use(express.json());
-app.use(morgan("combined"));
+app.use(morgan("dev"));
 
 app.use("/api", UserRouter);
+app.use("/api", LanguageRouter);
 
 app.get("/", (req, res) => {
   res.send({ message: "Welcome to SocialCode" });
