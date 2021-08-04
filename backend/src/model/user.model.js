@@ -8,7 +8,7 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    lastName: {
+    lastNname: {
       type: DataTypes.STRING,
     },
     email: {
@@ -16,6 +16,7 @@ const User = sequelize.define(
     },
   },
   {
+    underscored: true,
     timestamps: true,
   }
 );
