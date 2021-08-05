@@ -1,4 +1,4 @@
-const UserModel = require("../model/category.model");
+const CategoryModel = require("../model/category.model");
 const Controller = require("./controller");
 
 class CategoryController extends Controller {

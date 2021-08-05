@@ -1,4 +1,4 @@
-const UserModel = require("../model/film.model");
+const FilmModel = require("../model/film.model");
 const Controller = require("./controller");
 
 class FilmController extends Controller {

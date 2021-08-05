@@ -4,9 +4,11 @@ const express = require("express");
 
 const UserRouter = require("./routes/user.router");
 const LanguageRouter = require("./routes/language.router");
-const FilmRouter = require("./routes/film.router");
+
+/*const FilmRouter = require("./routes/film.router");
 const CategoryRouter = require("./routes/category.router");
-const ActorRouter = require("./routes/actor.router");
+const ActorRouter = require("./routes/actor.router");*/
+
 const HTTP_PORT = process.env.HTTP_PORT || 3333;
 
 const app = express();
@@ -15,9 +17,10 @@ app.use(morgan("dev"));
 
 app.use("/api", UserRouter);
 app.use("/api", LanguageRouter);
-app.use("/api", FilmRouter);
+
+/*app.use("/api", FilmRouter);
 app.use("/api", CategoryRouter);
-app.use("/api", ActorRouter);
+app.use("/api", ActorRouter);*/
 
 app.get("/", (req, res) => {
   res.send({ message: "Welcome to SocialCode" });
