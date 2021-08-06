@@ -9,7 +9,7 @@ const LanguageRouter = require("./routes/language.router");
 const CategoryRouter = require("./routes/category.router");
 const ActorRouter = require("./routes/actor.router");*/
 
-const HTTP_PORT = process.env.HTTP_PORT || 3333;
+const HTTP_PORT = process.env.HTTP_PORT ; //|| 3333;
 
 const app = express();
 app.use(express.json());
