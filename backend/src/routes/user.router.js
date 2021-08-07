@@ -1,24 +1,15 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../config/database");
+const express = require("express");
 
-const User = sequelize.define(
-  "User",
-  {
-    first_name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    last_name: {
-      type: DataTypes.STRING,
-    },
-    email: {
-      type: DataTypes.STRING,
-    },
-  },
-  {
-    underscored: true,
-    timestamps: true,
-  }
-);
+const UserController = require("../controllers/user.controller");
 
-module.exports = User;
+const Router = express.Router();
+
+const controller = new UserController();
+
+Router.get("/user/:id", (req, res) => controller.getOne(req, res));
+Router.get("/user", (req, res) => controller.getAll(req, res));
+Router.post("/user", (req, res) => controller.store(req, res));
+Router.put("/user/:id", (req, res) => controller.update(req, res));
+Router.delete("/user/:id", (req, res) => controller.remove(req, res));
+
+module.exports = Router;
