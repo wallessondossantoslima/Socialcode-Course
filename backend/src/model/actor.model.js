@@ -11,6 +11,7 @@ const Actor = sequelize.define(
         },
     },
     {
+        underscored: true,
         timestamps: true,
     }
 );
