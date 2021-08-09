@@ -8,6 +8,7 @@ class UserController extends Controller {
   }
   async auth(req, res){
     const {email, password} = req.body;
+
     const user = await UserModel.findOne({ raw: true, where: {email}});
 
     if(!user){
@@ -21,6 +22,7 @@ class UserController extends Controller {
     delete user.password;
 
     const token = jwt.sign(user, proncess.env.JWT_SECRET);
+    
     return res.send({user});
   }
 }

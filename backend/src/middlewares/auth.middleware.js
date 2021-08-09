@@ -1,8 +1,8 @@
 const jwt = require("jsonwebtoken");
 
-const public = ("/", "/api/auth");
+const public = ["/", "/api/auth"];
 
-const AuthMiddwares = (req, res, next) => {
+const AuthMiddleware = (req, res, next) => {
     const {authorization} = req.headers;
 
     if(public.includes(req.url)) {
@@ -15,11 +15,11 @@ const AuthMiddwares = (req, res, next) => {
     const [, token] = authorization.split(" ");
 
     try {
-        jwt.verify(token, proncess.env.JWT_SECRET);
+        jwt.verify(token, process.env.JWT_SECRET);
         next();
     } catch (error) {
         res.status(404).send({message: "error"});
     }
 };
 
-module.exports = AuthMiddwares;
+module.exports = AuthMiddleware;
