@@ -1,25 +1,27 @@
 const jwt = require("jsonwebtoken");
 
-const public = ["/", "/api/auth"];
+const publicRoutes = ["/", "/api/auth"];
 
 const AuthMiddleware = (req, res, next) => {
-    const {authorization} = req.headers;
+  const { authorization } = req.headers;
 
-    if(public.includes(req.url)) {
-        return next();
-    }
+  if (!process.env.AUTH_MIDDLEWARE_ENABLED || publicRoutes.includes(req.url)) {
+    return next();
+  }
 
-    if (!authorization) {
-        res.status.send({message: "not found"});
-    }
-    const [, token] = authorization.split(" ");
+  if (!authorization) {
+    return res.status(401).send({ message: "Authorization not found" });
+  }
 
-    try {
-        jwt.verify(token, process.env.JWT_SECRET);
-        next();
-    } catch (error) {
-        res.status(404).send({message: "error"});
-    }
+  const [, token] = authorization.split(" ");
+
+  try {
+    jwt.verify(token, process.env.JWT_SECRET);
+
+    next();
+  } catch (error) {
+    res.status(401).send({ message: "Invalid Access Token" });
+  }
 };
 
 module.exports = AuthMiddleware;
